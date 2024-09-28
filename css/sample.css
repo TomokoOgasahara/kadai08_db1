@@ -1,0 +1,64 @@
+
+/* ヘッダーのテキスト */
+
+h1{
+    color:white;
+    background-color: #023671;
+    font-family: "Zen Maru Gothic", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 35px;
+    text-align: center;
+    margin: 0 20px; /* h1と画像の間に少し余白を持たせる */
+}
+
+/* 各グラフとタイトルを入れるボックス */
+.graph-box {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    height: 400px; /* ボックス全体の高さを統一 */
+    display: flex;
+    flex-direction: column; /* 縦方向に並べる */
+    justify-content: center; /* 横方向に中央寄せ */
+    align-items: center; /* 縦方向に中央寄せ */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.graph-title {
+    color: #023671;
+    font-family: "Zen Maru Gothic", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    text-align: center;
+}
+
+form {
+    color: black;
+    font-family: "Zen Maru Gothic", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+button {
+    font-family: "Zen Maru Gothic", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+
+
+
