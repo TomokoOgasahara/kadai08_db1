@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+
   <meta charset="UTF-8">
   <title>データ登録</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <style>div{padding: 10px;font-size:16px;}</style>
+
+  <link href="css/sample.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
@@ -20,10 +25,12 @@
 
 <!-- Main[Start] -->
 <form method="POST" action="insert.php">
-  <div class="jumbotron">
+<div class="jumbotron">
    <fieldset>
     <legend>Wom-tech 女性活躍口コミサイト</legend>
+</div>
 
+<div class="form">
     <br><label>企業名：<input type="text" name="company"></label><br>
 
     <br><label>性別：
@@ -89,7 +96,8 @@
 
     <br><br>良い点：<br><textarea name="memo1" cols="30" rows="10"></textarea>
     <br><br>悪い点：<br><textarea name="memo2" cols="30" rows="10"></textarea>
-    <br><br><input type="submit" value="送信">
+
+    <br><br><button class="glass-button" input type="submit" value="送信">送信</button>
     </fieldset>
   </div>
 </form>

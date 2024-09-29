@@ -1,63 +1,62 @@
 
+fieldset {
+    border: none;
+  }
+
 /* ヘッダーのテキスト */
 
-h1{
-    color:white;
-    background-color: #023671;
-    font-family: "Zen Maru Gothic", serif;
+.jumbotron{
+    color:black;
+    background-color: #f0f8ff;
+    font-family: "Shippori Mincho B1", serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 35px;
+    font-size: 25px;
+    text-align: center;
+    margin: 0 20px; /* h1と画像の間に少し余白を持たせる */
+    margin-top: 30px;
+}
+
+.navbar-header{
+    color:black;
+    background-color: #f0f8ff;
+    font-family: "Shippori Mincho B1", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
     text-align: center;
     margin: 0 20px; /* h1と画像の間に少し余白を持たせる */
 }
 
-/* 各グラフとタイトルを入れるボックス */
-.graph-box {
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-    height: 400px; /* ボックス全体の高さを統一 */
-    display: flex;
-    flex-direction: column; /* 縦方向に並べる */
-    justify-content: center; /* 横方向に中央寄せ */
-    align-items: center; /* 縦方向に中央寄せ */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
+/* フォームのテキスト */
 
-.graph-title {
-    color: #023671;
-    font-family: "Zen Maru Gothic", serif;
+.form{
+    color:black;
+    background-color: #f0f8ff;
+    font-family: "Shippori Mincho B1", serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 24px;
+    font-size: 15px;
     text-align: center;
+    margin: 0 20px; /* h1と画像の間に少し余白を持たせる */
 }
 
-form {
-    color: black;
-    font-family: "Zen Maru Gothic", serif;
-    font-weight: 400;
-    font-style: normal;
+.glass-button {
+    background: rgba(255, 255, 255, 0.2);
+    color: #333;
+    border: none;
+    padding: 12px 24px;
     font-size: 16px;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-
-button {
-    font-family: "Zen Maru Gothic", serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
+    border-radius: 12px;
+    box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1),
+                -8px -8px 15px rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease;
+  }
+  
+  .glass-button:hover {
+    transform: translateY(-2px);
+  }
 
 
 

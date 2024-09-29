@@ -1,7 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="css/sample_select.css?v=1.0" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.jsを読み込む -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <title>Wom-tech 企業口コミ投稿結果</title>
+
+</head>
+<body>
+
 <?php
 //1.  DB接続します
 try {
-  //Password:MAMP='root',XAMPP=''
   //Password:MAMP='root',XAMPP=''
   $db_name = 'wom-tech_kadai08_db1';
   $db_host = 'mysql3101.db.sakura.ne.jp';
@@ -65,31 +85,29 @@ foreach ($values as $value) {
 }
 $average3 = $count3 > 0 ? $sum3 / $count3 : 0; // 平均値を計算
 
+// 制御文字を削除するための関数
+function removeControlCharacters($string) {
+  return preg_replace('/[[:cntrl:]]/', '', $string);
+}
+
+// 全データ取得後に、制御文字を削除
+foreach ($values as &$value) {
+  foreach ($value as &$field) {
+      if (is_string($field)) {
+          $field = removeControlCharacters($field); // 制御文字を削除
+      }
+  }
+}
+
 //JSONに値を渡す場合に使う
 $json = json_encode($values,JSON_UNESCAPED_UNICODE);
 
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.jsを読み込む -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<html>
+<body>
 
-<title>Wom-tech 企業口コミ投稿結果</title>
 
-<link rel="stylesheet" href="css/range.css">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<style>div{padding: 10px;font-size:16px;}
-td{border: 1px solid red;}</style>
-</head>
-<body id="main">
 
 <!-- Head[Start] -->
 <header>
@@ -106,35 +124,71 @@ td{border: 1px solid red;}</style>
 
 <!-- Main[Start] -->
 
-<body>
+<div class= "wom">
+<img class="logo" src="img/W_logo.png" alt="logo" />
+<h1>Wom-tech</h1>
+</div>
 
-<h1>Wom-tech 企業口コミ投稿結果</h1>
+<div class="company">
+  <h3>企業名：トヨタ自動車株式会社</h3>
+</div>
 
+<div class="hyoka">
+  <h3>総合評価・スコア：</h3>
+</div>
+
+  <!-- 親要素にflexを適用 -->
+  <div class="graph-container">
+    <div class="rader-chart-box">
+      <canvas id="myRadarChart" width="200" height="200"></canvas>  
+    </div>
+  <div class="table-box">
+  <table>
+      <tr>
+        <td>管理職に占める女性の割合</td>
+        <td>◯%</td>
+      </tr>
+      <tr>
+        <td>平均残業時間</td>
+        <td>25時間</td>
+      </tr>
+      <tr>
+        <td>有給休暇取得率</td>
+        <td>80％</td>
+      </tr>
+  </table>
+</div>
+</div>
+
+<div class="graph-container">
+<!-- 1つめのグラフ -->
 <div class="graph-box">
-    <h2 class="graph-title">①年収に対する満足度</h2>
+    <h2 class="graph-title">① 年収に対する満足度</h2>
     <h2>平均値：<?= number_format($average1, 2); ?></h2>
     <!-- PHPで計算された平均値を表示 -->
     <canvas id="myBarChart1" width="200" height="200"></canvas>
 </div>
 
 <div class="graph-box">
-    <h2 class="graph-title">②働きがいに対する満足度</h2>
-    <h2>平均値：<?= number_format($average2, 2); ?></h2>
-    <!-- PHPで計算された平均値を表示 -->
+  <h2 class="graph-title">② 働きがいに対する満足度</h2>
+  <h2>平均値：<?= number_format($average2, 2); ?></h2>
+  <!-- PHPで計算された平均値を表示 -->  
     <canvas id="myBarChart2" width="200" height="200"></canvas>
 </div>
 
 <div class="graph-box">
-    <h2 class="graph-title">③働きやすさに対する満足度</h2>
+    <h2 class="graph-title">③ 働きやすさに対する満足度</h2>
     <h2>平均値：<?= number_format($average3, 2); ?></h2>
     <!-- PHPで計算された平均値を表示 -->
     <canvas id="myBarChart3" width="200" height="200"></canvas>
+</div>
 </div>
 
 </body>
 
 <div>
     <div class="container jumbotron"></div>
+    <h2>口コミ一覧</h2>
 <table>
 <?php foreach($values as $value){ ?>
   <tr>
@@ -147,9 +201,6 @@ td{border: 1px solid red;}</style>
    <td><?=$value["experience"]?></td>
    <td><?=$value["type"]?></td>
    <td><?=$value["position"]?></td>
-   <td><?=$value["star1"]?></td>
-   <td><?=$value["star2"]?></td>
-   <td><?=$value["star3"]?></td>
    <td><?=$value["memo1"]?></td>
    <td><?=$value["memo2"]?></td>
 </tr> 
@@ -159,7 +210,7 @@ td{border: 1px solid red;}</style>
 </div>
 <!-- Main[End] -->
 
-
+</html>
 
 <script>
 
@@ -232,6 +283,7 @@ td{border: 1px solid red;}</style>
   var data3 = Object.values(count3); // 出現回数（値）をデータに   
 
 // グラフを描画する
+createMyRadarChart(<?= $average1 ?>, <?= $average2 ?>, <?= $average3 ?>, 'myRadarChart');
 createBarChart(labels1, data1, 'myBarChart1');
 createBarChart(labels2, data2, 'myBarChart2');
 createBarChart(labels3, data3, 'myBarChart3');
@@ -239,37 +291,102 @@ createBarChart(labels3, data3, 'myBarChart3');
 // グラフを描画する関数の定義
 function createBarChart(labels, data, canvasId){
 
-    const ctx = document.getElementById(canvasId).getContext('2d');
-    new Chart(ctx, {
-        type: 'bar', // 棒グラフの指定
-        data: {
-            labels: labels, // X軸のラベル
-            datasets: [{
-                data: data, // データセット
-                backgroundColor: 'rgba(75, 192, 192, 0.2)', // 背景色
-                borderColor: 'rgba(75, 192, 192, 1)', // 枠線の色
-                borderWidth: 1 // 枠線の幅
-            }]
-        },
-        options: {
+const ctx = document.getElementById(canvasId).getContext('2d');
+new Chart(ctx, {
+    type: 'bar', // 棒グラフの指定
+    data: {
+        labels: labels, // X軸のラベル
+        datasets: [{
+            data: data, // データセット
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', // 背景色
+            borderColor: 'rgba(75, 192, 192, 1)', // 枠線の色
+            borderWidth: 1 // 枠線の幅
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true, // Y軸が0から始まるように設定
+                ticks: {
+                    maxTicksLimit : 10
+                }
+            }
+
+            }
+        }
+    }
+)};
+
+
+// グラフを描画する関数の定義
+function createMyRadarChart(average1, average2, average3, canvasId) {
+var ctx = document.getElementById("myRadarChart").getContext('2d');
+var myRadarChart = new Chart(ctx, {
+    type: 'radar', // レーダーチャートの指定
+    data: {    
+    labels: ["年収", "働きがい", "働きやすさ"],
+    //データセット
+    datasets: [{
+                label: "平均値",
+                //背景色
+                backgroundColor: "rgba(51,255,51,0.5)",
+                //枠線の色
+                borderColor: "rgba(51,255,51,1)",
+                //結合点の背景色
+                pointBackgroundColor: "rgba(51,255,51,1)",
+                //結合点の枠線の色
+                pointBorderColor: "#fff",
+                //結合点の背景色（ホバ時）
+                pointHoverBackgroundColor: "#fff",
+                //結合点の枠線の色（ホバー時）
+                pointHoverBorderColor: "rgba(51,255,51,1)",
+                //結合点より外でマウスホバーを認識する範囲（ピクセル単位）
+                hitRadius: 5,
+    data: [average1, average2, average3]
+    }]
+  },
+
+  options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
-                y: {
-                    beginAtZero: true, // Y軸が0から始まるように設定
+                r: {  // `r` is for radar chart specific settings
                     ticks: {
-                        maxTicksLimit : 10
+                        beginAtZero: true,
+                        min: 0,
+                        stepSize: 1,
+                        max: 5,
+                        font: {
+                          family: 'Shippori Mincho B1',
+                          weight: 'normal',
+                          style: 'normal',
+                          size: 15 // 軸ラベルのフォントサイズ変更
+                        }
+                    },
+                    pointLabels: {
+                        font: {
+                          family: 'Shippori Mincho B1',
+                          weight: 'normal',
+                          style: 'normal',
+                          size: 15 // 項目ラベルのフォントサイズ変更
+                        }
                     }
                 }
-
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                          family: 'Shippori Mincho B1',
+                          weight: 'normal',
+                          style: 'normal',
+                          size: 15 // 凡例ラベルのフォントサイズ変更
+                        }
+                    }
                 }
             }
         }
-    )};
-
-
-</script>
-
-
+    });
+}
 
 </script>
-</body>
-</html>
