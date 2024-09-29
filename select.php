@@ -25,8 +25,8 @@ try {
   //Password:MAMP='root',XAMPP=''
   $db_name = 'wom-tech_kadai08_db1';
   $db_host = 'mysql3101.db.sakura.ne.jp';
-  $db_id = 'wom-tech';
-  $db_pw = 'Tomoko_24';
+  $db_id = '******';
+  $db_pw = '******';
 
   $server_info = 'mysql:dbname='.$db_name.';charset=utf8;host='.$db_host;
   $pdo = new PDO($server_info, $db_id, $db_pw);
